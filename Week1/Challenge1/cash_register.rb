@@ -11,7 +11,6 @@ require 'pry'
 
 items = []
 
-
 puts "What is the sale price?"
 sale_price = gets.chomp
 
