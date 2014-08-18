@@ -1,0 +1,105 @@
+/* Nav Bar */
+nav {
+  background-color: #ff6600;
+  color: black;
+}
+
+nav ul{
+  list-style: none;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 3px;
+}
+
+nav ul li a{
+  text-decoration: none;
+  border-right: solid 1px #000;
+  color: black;
+  margin-right: 10px;
+  padding-right: 15px;
+}
+
+#brand {
+  font-weight: bold;
+  border-right: none;
+}
+
+nav ul li:last-child {
+  float:right;
+}
+#login {
+  border: none;
+}
+
+#logo {
+  border: solid 1px #fff;
+  margin-top: 5px;
+  margin-left: -35px;
+}
+
+
+/* Main content */
+div#wrapper {
+  background-color: #f6f6ef;
+  margin: 0 auto;
+  width: 960px;
+  font-family: Verdana,Geneva,sans-serif;
+}
+
+section ol {
+  color: gray;
+}
+
+section ol ul {
+  list-style: none;
+
+}
+section ol ul li{
+  margin-left: -40px;
+  margin-bottom: -5px;
+
+}
+
+section ol ul li:last-child {
+  font-size: .6em;
+  color: gray;
+  padding-left: 12px;
+}
+
+section a {
+  text-decoration: none;
+  color: black;
+  font-size: .9em;
+
+}
+
+.upvote::before {
+  content: url('https://news.ycombinator.com/grayarrow.gif');
+  margin-right: 2px;
+}
+
+/* Footer */
+footer {
+  border-top: solid 2px #ff6600;
+  font-size: .75em;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer ul li {
+  display: inline-block;
+  color: black;
+  margin-right: 10px;
+}
+
+footer ul li a {
+  text-decoration: none;
+  color: black;
+  margin-right: 10px;
+}
