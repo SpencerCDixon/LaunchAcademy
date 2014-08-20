@@ -42,7 +42,6 @@ end
 
 
 get '/' do
-  @league = league
   @team_names = get_team_names(league)
   @positions = get_position(league)
   erb :view_teams
