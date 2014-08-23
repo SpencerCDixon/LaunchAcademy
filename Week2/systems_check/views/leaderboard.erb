@@ -1,0 +1,17 @@
+<h1> Leaderboards </h1>
+<table>
+  <tr>
+    <th>Home Team</th>
+    <th>Away Team</th>
+    <th>Home Score</th>
+    <th>Away Score</th>
+  </tr>
+<% @scores.each do |row| %>
+  <tr>
+    <td><%= row[:hometeam] %></td>
+    <td><%= row[:awayteam] %></td>
+    <td><%= row[:homescore] %></td>
+    <td><%= row[:awayscore] %></td>
+  </tr>
+<% end %>
+</table>
