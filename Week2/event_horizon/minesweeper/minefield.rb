@@ -7,7 +7,7 @@ class Minefield
     @column_count = column_count
     @row_count = row_count
     # Instance Variables I Made
-    @gameboard = create_bank_board(row_count, column_count)
+    # @gameboard = create_bank_board(row_count, column_count)
   end
 
   # Return true if the cell been uncovered, false otherwise.
@@ -49,17 +49,17 @@ class Minefield
 
 # Methods That I Made Myself
   private
-
-  def create_blank_board(row_count, column_count)
-    board = []
-    column_count.times { board << Array.new(row_count, "x") }
-    board
-  end
-
-  def populate_bombs(row_count, column_count, board)
-    x = rand(1..row_count)
-    y = rand(1..column_count)
-    board[x][y] == 'o'
-  end
+  #
+  # def create_blank_board(row_count, column_count)
+  #   board = []
+  #   column_count.times { board << Array.new(row_count, "x") }
+  #   board
+  # end
+  #
+  # def populate_bombs(row_count, column_count, board)
+  #   x = rand(1..row_count)
+  #   y = rand(1..column_count)
+  #   board[x][y] == 'o'
+  # end
 
 end
