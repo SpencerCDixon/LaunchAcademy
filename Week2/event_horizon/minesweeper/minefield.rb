@@ -1,26 +1,39 @@
 require 'pry'
+require 'pp'
 class Minefield
   attr_reader :row_count, :column_count
-  attr_accessor :gameboard
+  attr_accessor :blank_board, :game_board
 
   def initialize(row_count, column_count, mine_count)
     @column_count = column_count
     @row_count = row_count
     # Instance Variables I Made
-    # @gameboard = create_bank_board(row_count, column_count)
+
+    # Creates a blank gameboard and then puts bombs in
+    @game_board = []
+    initialize_game_board
+    place_bombs(mine_count)
+
   end
 
   # Return true if the cell been uncovered, false otherwise.
   def cell_cleared?(row, col)
-
+    if game_board[row][col] == 'x'
+      true
+    else
+      false
+    end
   end
 
   # Uncover the given cell. If there are no adjacent mines to this cell
   # it should also clear any adjacent cells as well. This is the action
   # when the player clicks on the cell.
   def clear(row, col)
-    puts row
-    puts col
+    if game_board[row][col] == 'x'
+      true
+    else
+      false
+    end
   end
 
   # Check if any cells have been uncovered that also contained a mine. This is
@@ -42,24 +55,29 @@ class Minefield
 
   # Returns true if the given cell contains a mine, false otherwise.
   def contains_mine?(row, col)
-    false
+    if game_board[row][col] == 'o'
+       true
+    else
+      false
+    end
   end
 
+# Methods That I Made
 
+  def initialize_game_board
+    column_count.times { @game_board << Array.new(row_count, "x") }
+  end
 
-# Methods That I Made Myself
-  private
-  #
-  # def create_blank_board(row_count, column_count)
-  #   board = []
-  #   column_count.times { board << Array.new(row_count, "x") }
-  #   board
-  # end
-  #
-  # def populate_bombs(row_count, column_count, board)
-  #   x = rand(1..row_count)
-  #   y = rand(1..column_count)
-  #   board[x][y] == 'o'
-  # end
+  def place_bombs( mine_count )
+    count = mine_count
+    until count == 0
+      x = rand(row_count)
+      y = rand(column_count)
+      if @game_board[x][y] == 'x'
+        @game_board[x][y] = 'o'
+        count -= 1
+      end
+    end
+  end
 
 end

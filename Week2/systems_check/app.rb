@@ -10,9 +10,11 @@ before do
   end
 end
 
-
 ### Routes ###
+get '/' do
+  redirect 'leaderboard'
+end
+
 get '/leaderboard' do
-  binding.pry
   erb :leaderboard
 end
