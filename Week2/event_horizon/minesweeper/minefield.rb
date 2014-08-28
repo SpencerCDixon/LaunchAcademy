@@ -1,14 +1,14 @@
 require 'pry'
 require 'pp'
 class Minefield
-  attr_reader :row_count, :column_count
+  attr_reader :row_count, :column_count, :mine_count
   attr_accessor :blank_board, :game_board, :visible_board
 
   def initialize(row_count, column_count, mine_count)
     @column_count = column_count
     @row_count = row_count
     # Instance Variables I Made
-
+    @mine_count = mine_count
     # Creates a blank gameboard and then puts bombs in
     @game_board = []
     initialize_game_board
@@ -29,6 +29,10 @@ class Minefield
   # when the player clicks on the cell.
   def clear(row, col)
     visible_board[row][col] = "S"
+    
+
+
+
   end
 
   # Check if any cells have been uncovered that also contained a mine. This is
@@ -36,27 +40,49 @@ class Minefield
   def any_mines_detonated?
     x_cordinates = (0...row_count)
     y_cordinates = (0...column_count)
-
-    x_cordinates.each do |x|
-      y_cordinates.each do |y|
-        if game_board[x][y] == 'o' && visible_board[x][y] == 'S'
-          return true
+      x_cordinates.each do |x|
+        y_cordinates.each do |y|
+          if game_board[x][y] == 'o' && visible_board[x][y] == 'S'
+            return true
+          end
         end
       end
-    end
-
     false
   end
 
   # Check if all cells that don't have mines have been uncovered. This is the
   # condition used to see if the player has won the game.
   def all_cells_cleared?
-    
+    x_cordinates = (0...row_count)
+    y_cordinates = (0...column_count)
+    success = row_count * column_count - mine_count
+    counter = 0
+      x_cordinates.each do |x|
+        y_cordinates.each do |y|
+          if game_board[x][y] == 'x' && visible_board[x][y] == 'S'
+             counter += 1
+             if counter == success
+               return true
+             end
+          end
+        end
+      end
+    false
   end
 
   # Returns the number of mines that are surrounding this cell (maximum of 8).
   def adjacent_mines(row, col)
-    0
+    counter = 0
+
+    [-1,0,1].each do |x|
+      [-1,0,1].each do |y|
+        if mine_present?(row + x,col + y)
+          counter += 1
+        end
+      end
+    end
+
+    counter
   end
 
   # Returns true if the given cell contains a mine, false otherwise.
@@ -90,4 +116,8 @@ class Minefield
     column_count.times { @visible_board << Array.new(row_count, "H")}
   end
 
+
+  def mine_present?(row,col)
+    game_board[row][col] == 'o'
+  end
 end
