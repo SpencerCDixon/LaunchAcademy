@@ -28,11 +28,22 @@ class Minefield
   # it should also clear any adjacent cells as well. This is the action
   # when the player clicks on the cell.
   def clear(row, col)
-    visible_board[row][col] = "S"
-    
+    if visible_board[row][col] != "S"
+      visible_board[row][col] = "S"
 
+      if adjacent_mines(row,col) == 0
 
+        [-1,0,1].each do |x|
+          [-1,0,1].each do |y|
+            unless x == 0 && y == 0
+              clear((row + x),(col + y))
+            end
+          end
+        end
 
+        
+      end
+    end
   end
 
   # Check if any cells have been uncovered that also contained a mine. This is
@@ -73,7 +84,6 @@ class Minefield
   # Returns the number of mines that are surrounding this cell (maximum of 8).
   def adjacent_mines(row, col)
     counter = 0
-
     [-1,0,1].each do |x|
       [-1,0,1].each do |y|
         if mine_present?(row + x,col + y)
@@ -81,7 +91,6 @@ class Minefield
         end
       end
     end
-
     counter
   end
 
@@ -115,7 +124,6 @@ class Minefield
   def initialize_visibility_board
     column_count.times { @visible_board << Array.new(row_count, "H")}
   end
-
 
   def mine_present?(row,col)
     game_board[row][col] == 'o'
