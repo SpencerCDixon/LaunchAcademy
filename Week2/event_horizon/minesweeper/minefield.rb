@@ -31,15 +31,12 @@ class Minefield
         unless row == 0
           clear( row - 1 , col )
         end
-
         unless col >= (column_count - 1)
           clear( row, col + 1 )
         end
-
-        unless row >= (row_count - 1)
+        unless row == (row_count - 1)
           clear( row + 1, col )
         end
-
         unless col == 0
           clear( row, col - 1 )
         end
@@ -97,15 +94,14 @@ class Minefield
 
   # Returns true if the given cell contains a mine, false otherwise.
   def contains_mine?(row, col)
-    if game_board[row][col] == 'o'
-      true
-    else
-      false
-    end
+    within_field?(row,col) && game_board[row][col] == 'o'
   end
 
 # Methods That I Made
-
+  def within_field?(row,col)
+    row >= 0 && row < row_count && col >= 0 && col < column_count
+  end
+  
   def initialize_game_board
     column_count.times { @game_board << Array.new(row_count, "x") }
   end
