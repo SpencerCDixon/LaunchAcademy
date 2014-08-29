@@ -27,21 +27,51 @@ class Minefield
   # Uncover the given cell. If there are no adjacent mines to this cell
   # it should also clear any adjacent cells as well. This is the action
   # when the player clicks on the cell.
+  # def clear(row, col)
+  #   if visible_board[row][col] != "S"
+  #     visible_board[row][col] = "S"
+  #
+  #     if adjacent_mines(row,col) == 0
+  #
+  #       [-1,0,1].each do |x|
+  #         [-1,0,1].each do |y|
+  #           unless x == 0 && y == 0
+  #             clear((row + x),(col + y))
+  #           end
+  #         end
+  #       end
+  #
+  #
+  #     end
+  #   end
+  # end
+
   def clear(row, col)
     if visible_board[row][col] != "S"
       visible_board[row][col] = "S"
-
       if adjacent_mines(row,col) == 0
 
-        [-1,0,1].each do |x|
-          [-1,0,1].each do |y|
-            unless x == 0 && y == 0
-              clear((row + x),(col + y))
-            end
-          end
-        end
+        # [-1,0,1].each do |x|
+        #   [-1,0,1].each do |y|
+            # unless row == 0 || col == 0
+              unless row == 0
+                clear( row - 1 , col )
+              end
 
-        
+              unless col == column_count - 1
+                clear( row, col + 1 )
+              end
+
+              unless row == row_count - 1
+                clear( row + 1, col )
+              end
+
+              unless col == 0
+                clear( row, col - 1 )
+              end
+            #end
+        #   end
+        # end
       end
     end
   end
@@ -86,7 +116,7 @@ class Minefield
     counter = 0
     [-1,0,1].each do |x|
       [-1,0,1].each do |y|
-        if mine_present?(row + x,col + y)
+        if contains_mine?(row + x,col + y)
           counter += 1
         end
       end
@@ -125,7 +155,4 @@ class Minefield
     column_count.times { @visible_board << Array.new(row_count, "H")}
   end
 
-  def mine_present?(row,col)
-    game_board[row][col] == 'o'
-  end
 end
