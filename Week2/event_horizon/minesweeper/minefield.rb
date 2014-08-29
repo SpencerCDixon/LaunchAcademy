@@ -24,54 +24,25 @@ class Minefield
     visible_board[row][col] == "S"
   end
 
-  # Uncover the given cell. If there are no adjacent mines to this cell
-  # it should also clear any adjacent cells as well. This is the action
-  # when the player clicks on the cell.
-  # def clear(row, col)
-  #   if visible_board[row][col] != "S"
-  #     visible_board[row][col] = "S"
-  #
-  #     if adjacent_mines(row,col) == 0
-  #
-  #       [-1,0,1].each do |x|
-  #         [-1,0,1].each do |y|
-  #           unless x == 0 && y == 0
-  #             clear((row + x),(col + y))
-  #           end
-  #         end
-  #       end
-  #
-  #
-  #     end
-  #   end
-  # end
-
   def clear(row, col)
     if visible_board[row][col] != "S"
       visible_board[row][col] = "S"
       if adjacent_mines(row,col) == 0
+        unless row == 0
+          clear( row - 1 , col )
+        end
 
-        # [-1,0,1].each do |x|
-        #   [-1,0,1].each do |y|
-            # unless row == 0 || col == 0
-              unless row == 0
-                clear( row - 1 , col )
-              end
+        unless col >= (column_count - 1)
+          clear( row, col + 1 )
+        end
 
-              unless col == column_count - 1
-                clear( row, col + 1 )
-              end
+        unless row >= (row_count - 1)
+          clear( row + 1, col )
+        end
 
-              unless row == row_count - 1
-                clear( row + 1, col )
-              end
-
-              unless col == 0
-                clear( row, col - 1 )
-              end
-            #end
-        #   end
-        # end
+        unless col == 0
+          clear( row, col - 1 )
+        end
       end
     end
   end
