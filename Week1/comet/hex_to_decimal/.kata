@@ -1,6 +1,0 @@
----
-name: Hex to Decimal
-difficulty: 3
-language: ruby
-test_runner: rspec
-id: 6
