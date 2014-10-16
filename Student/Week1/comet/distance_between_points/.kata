@@ -1,0 +1,6 @@
+---
+name: Distance Between Points
+difficulty: 2
+language: ruby
+test_runner: rspec
+id: 4

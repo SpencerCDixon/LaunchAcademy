@@ -7,7 +7,7 @@ describe 'tic tac toe' do
              [' ', ' ', ' ']]
 
     expect(winner?(input)).to eq true
-  end
+ end
 
   it 'finds vertical winners' do
     input = [['o', ' ', ' '],
